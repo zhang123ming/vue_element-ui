@@ -1,0 +1,73 @@
+/* init */
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* global css */
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.title {
+  padding: 10px 20px;
+  display: inline-block;
+  border-left: 3px solid red;
+  background: #f1f1f1;
+  margin-bottom: 10px;
+
+}
+
+.active-color {
+  color: #fff;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.el-dropdown-link:focus {
+  outline: none;
+}
+
+#left-header .el-col .el-card .el-card__body {
+  padding: 0;
+}
