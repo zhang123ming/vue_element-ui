@@ -6,11 +6,12 @@ const Video = () => import( /*webpackChunkName:'Register'*/ '@/pages/View/Video/
 const Home = () => import( /*webpackChunkName:'Register'*/ '@/pages/View/Home/Index.vue');
 const User = () => import( /*webpackChunkName:'Register'*/ '@/pages/View/User/Index.vue');
 const Cart = () => import( /*webpackChunkName:'Register'*/ '@/pages/View/Cart/Index.vue');
+
 const Other1 = () => import( /*webpackChunkName:'Register'*/ '@/pages/View/Other/Other1.vue');
 const Other2 = () => import( /*webpackChunkName:'Register'*/ '@/pages/View/Other/Other2.vue');
 Vue.use(Router)
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   linkActiveClass: 'active',
   routes: [
   {path:'/demo',name:'Demo',component:Demo,children:[

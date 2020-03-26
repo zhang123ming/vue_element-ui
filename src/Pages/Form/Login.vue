@@ -76,8 +76,6 @@ export default {
   watch: {},
   methods: {
     login() {
-      console.log(this.formData);
-      window.localStorage.setItem("token", JSON.stringify(Math.random()));
       window.localStorage.setItem("userInfo", JSON.stringify(this.formData));
       this.$store.commit("SET_USERINFO", this.formData);
       this.$router.push({ path: "/demo" });

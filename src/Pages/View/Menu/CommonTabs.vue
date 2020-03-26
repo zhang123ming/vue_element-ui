@@ -44,7 +44,5 @@ export default {
   margin-left: 10px;
   margin-top: 15px;
 }
-.el-tag:first-child {
-  // margin: 0;
-}
+
 </style>

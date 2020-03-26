@@ -1,15 +1,11 @@
 const goods = {
   state: {
-    goods: [] || JSON.parse(localStorage.getItem("goods")),
-    goodsObj: {},
+    goods: JSON.parse(localStorage.getItem("goods")) || [],
+    all_money: 0,
+    isAllSelect: false,
+    allCount: 0,
 
   },
-  /**
-   * all_money: 0, //总价
-   * all_select_count: 0, //商品选择个数
-   * all_select_checkbox: false, //全选  取消全选
-   * 
-   * */
   mutations: {
     //   init
     SET_GOODS(state, goods) {
@@ -17,67 +13,74 @@ const goods = {
       state.goods = goods;
     },
     // 全选 取消全选
-    SET_ALLCHECKED(state, checked) {
-      let goods = state.goods;
-      // for (var i = 0; i < goods.length; i++) {
-      //   goods[i].checked = checked;
-      // }
-      state.goods = goods;
-      state.goodsObj.all_select_checkbox = checked;
-      console.log("全选  取消全选");
+    SELECTALL(state) {
+      state.isAllSelect = !state.isAllSelect;
+      if (state.isAllSelect) {
+        state.goods.forEach((item) => {
+          item.checked = true
+        })
+      } else {
+        state.goods.forEach((item) => {
+          item.checked = false;
+        })
+      }
+
+
     },
     // 单选
-    SET_A_CHECKED(state, good) {
-      let goods = state.goods;
-      for (var i = 0; i < goods.length; i++) {
-        if (goods[i].id === good.id) {
-          goods[i] = good;
-          console.log("单选", goods[i]);
+    SELECT(state, id) {
+      for (let i = 0; i < state.goods.length; i++) {
+        if (state.goods[i].id === id) {
+          state.goods[i].checked = !state.goods[i].checked;
         }
       }
-      state.goods = goods;
-      window.localStorage.setItem("goods", JSON.stringify(state.goods));
-
-    },
-    // 增加减少
-    SET_GOODSNUMBER(state, good) {
-      state.goods.map(item => {
-        if (item.id == good.id) {
-          item = good;
-        }
+      let flag = state.goods.some((item) => {
+        return item.checked == false;
       })
-      window.localStorage.setItem("goods", JSON.stringify(state.goods));
-
-    },
-
-  },
-  getters: {
-    getGoodsObj(state) {
-      let obj = {}
-      let all_money = 0;
-      let all_select_count = 0;
-      let all_select_checkbox = false;
-      let count = 0;
-      state.goods.forEach(item => {
-        if (item.checked) {
-          all_money += item.number * item.price;
-          all_select_count += item.number;
-          count++;
-        }
-      })
-      if (count == state.goods.length) {
-        all_select_checkbox = true;
-
+      if (!flag) {
+        state.isAllSelect = true
       } else {
-        all_select_checkbox = false;
-
+        state.isAllSelect = false;
       }
-      obj.all_money = all_money;
-      obj.all_select_count = all_select_count;
-      obj.all_select_checkbox = all_select_checkbox;
-      return state.goodsObj = obj;
     },
   },
+
+  getters: {
+    getGoods(state) {
+      if (state.allSelect) {
+        state.goods.forEach(item => {
+          item.checked = true;
+        })
+      }
+      return state.goods;
+    },
+    getAllMoney(state) {
+      let money = 0;
+      state.goods.forEach((item) => {
+        if (item.checked) {
+          money += item.count * item.price;
+        }
+      })
+      return state.all_money = money;
+    },
+    allSelsect(state) {
+      if (state.isAllSelect) {
+        state.goods.forEach((item) => {
+          item.checked = true;
+        })
+      }
+      return state.isAllSelect;
+    },
+    getCount(state) {
+      let count = 0;
+      state.goods.forEach((item) => {
+        if (item.checked) {
+          count += item.count;
+        }
+      })
+      return state.allCount = count;
+    }
+  }
 
 }
 export default goods;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CartList  style="margin-bottom:50px"></CartList>
+    <CartList style="margin-bottom:50px"></CartList>
     <CartCalculator></CartCalculator>
   </div>
 </template>
@@ -14,9 +14,7 @@ export default {
     CartCalculator
   },
   data() {
-    return {
-      goods: []
-    };
+    return {};
   },
   created() {
     this.getGoods();
@@ -26,8 +24,12 @@ export default {
   methods: {
     getGoods() {
       this.$http.get("./../../../../static//goods.json").then(res => {
-        this.goods = res.data.message;
-        this.$store.commit("SET_GOODS", this.goods);
+        let data = res.data.message;
+        for (let i = 0; i < data.length; i++) {
+          data[i].checked = false;
+          data[i].count = 1;
+        }
+        this.$store.commit("SET_GOODS", data);
       });
     }
   },

@@ -10,5 +10,6 @@ export default new Vuex.Store({
     auth,
     tab,
     goods
-  }
+  },
+ 
 })

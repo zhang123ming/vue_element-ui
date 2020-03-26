@@ -77,6 +77,7 @@ export default {
           name: "Cart",
           icon: "goods"
         },
+
         {
           label: "其他",
           icon: "setting",

@@ -4,7 +4,23 @@
       <el-row>
         <el-col :span="24">
           <div class="box">
-            <el-checkbox v-model="good.checked"></el-checkbox>
+            <img
+              src="./../../../../static/checkeds.jpg"
+              width="25px;"
+              height="25px;"
+              v-if="good.checked"
+              alt
+              @click="select(good.id)"
+            />
+            <img
+              src="./../../../../static/check.jpg"
+              @click="select(good.id)"
+              width="25px;"
+              v-else
+              height="25px;"
+              alt
+            />
+
             <div>
               <img class="good-img" :src="good.img" alt />
             </div>
@@ -14,14 +30,7 @@
                 <strong class="good-price">$ {{good.price}}</strong>
               </p>
               <div style="margin-top:10px;">
-                <el-input-number
-                  size="mini"
-                  v-model="good.number"
-                  @change="handleChange"
-                  :min="1"
-                  :max="10"
-                  label="描述文字"
-                ></el-input-number>
+                <el-input-number size="mini" v-model="good.count" :min="1" :max="10" label="描述文字"></el-input-number>
               </div>
             </div>
           </div>
@@ -32,6 +41,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   props: ["good"],
   components: {},
@@ -39,20 +50,11 @@ export default {
     return {};
   },
   created() {},
-  computed: {
-    checked() {
-      return this.good.checked;
-    }
-  },
-  watch: {
-    checked(val) {
-      this.$store.commit("SET_A_CHECKED", this.good);
-    }
-  },
+  computed: {},
+  watch: {},
   methods: {
-    handleChange(value) {
-      this.good.number = value;
-      this.$store.commit("SET_GOODSNUMBER", this.good);
+    select(id) {
+      this.$store.commit("SELECT", id);
     }
   },
   mounted() {}
